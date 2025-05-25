@@ -1,30 +1,15 @@
 <h2>רשימת סטודנטים</h2>
+<ul>
+  <li *ngFor="let student of students">
+    {{ student.firstName }} {{ student.lastName }}
+    <button (click)="onEditStudent(student)">✏️ עריכה</button>
+  </li>
+</ul>
 
-<table border="1">
-  <thead>
-    <tr>
-      <th>מזהה</th>
-      <th>שם פרטי</th>
-      <th>שם משפחה</th>
-      <th>כתובת</th>
-      <th>טלפון</th>
-      <th>פעיל</th>
-      <th>ממוצע</th>
-      <th>פעולות</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let student of students">
-      <td>{{ student.id }}</td>
-      <td>{{ student.firstName }}</td>
-      <td>{{ student.lastName }}</td>
-      <td>{{ student.address }}</td>
-      <td>{{ student.phone }}</td>
-      <td>{{ student.active ? 'כן' : 'לא' }}</td>
-      <td>{{ student.average }}</td>
-      <td>
-        <button (click)="deleteStudent(student.id)">🗑️ מחק</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<button (click)="onAddStudent()">➕ הוספת סטודנט</button>
+
+<app-student-details
+  *ngIf="selectedStudent"
+  [student]="selectedStudent"
+  (saveStudent)="onStudentSaved($event)">
+</app-student-details>

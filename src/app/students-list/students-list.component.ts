@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-interface Students {
-   id?: number;
+ export interface Students {
+   id: number | null;
    firstName?: string;
    lastName?:  string;
    address?: string;
    phone? : string;
    active?: boolean;
    average?: number;
+   exitDate?: string;
   }
 @Component({
   selector: 'app-students-list',
@@ -15,15 +16,15 @@ interface Students {
 })
 
 export class StudentsListComponent {
-  students = [
+  students : Students [] = [
     {
       id: 1,
       firstName: 'שרה',
-      lastName: 'כהן',
+      lastName:  'כהן',
       address: 'תאנה',
-      phone: '050-1234567',
+      phone : '054844444',
       active: true,
-      average: 92
+      average: 92,
     },
     {
       id: 2,
@@ -48,4 +49,58 @@ export class StudentsListComponent {
   deleteStudent(id: number) {
     this.students = this.students.filter(student => student.id !== id);
   }
+
+  selectedStudent: Students | null = null;
+
+  editStudent(student: Students) {
+    this.selectedStudent = student;
+  }
+
+  addNewStudent() {
+    this.selectedStudent = {
+      id: 0,
+      firstName: '',
+      lastName: '',
+      address: '',
+      phone: '',
+      active: true,
+      average: 0
+    };
+  }
+
+  clearSelection() {
+    this.selectedStudent = null;
+  }
+
+  onEditStudent(student: any) {
+    this.selectedStudent = { ...student }; // Clone for editing
+  }
+
+  onAddStudent() {
+    this.selectedStudent = {
+      id: null,
+      firstName: '',
+      lastName: '',
+      address: '',
+      phone: '',
+      active: true,
+      average: 0,
+      exitDate: ''
+    };
+  }
+
+  onStudentSaved(newStudent: any) {
+    if (newStudent.id) {
+      const index = this.students.findIndex(s => s.id === newStudent.id);
+      if (index !== -1) {
+        this.students[index] = { ...newStudent };
+      }
+    } else {
+      newStudent.id = this.students.length + 1;
+      this.students.push(newStudent);
+    }
+
+    this.selectedStudent = null; 
+  }
+
 }

@@ -1,0 +1,12 @@
+<div class="student-form">
+    <label>שם פרטי: <input [(ngModel)]="student.firstName" /></label><br />
+    <label>שם משפחה: <input [(ngModel)]="student.lastName" /></label><br />
+    <label>כתובת: <input [(ngModel)]="student.address" /></label><br />
+    <label>טלפון: <input [(ngModel)]="student.phone" /></label><br />
+    <label>ממוצע ציונים: <input type="number" [(ngModel)]="student.avgGrade" /></label><br />
+    <label>פעיל: <input type="checkbox" [(ngModel)]="student.active" /></label><br />
+    <div *ngIf="!student.active">
+      <label>תאריך עזיבה: <input type="date" [(ngModel)]="student.exitDate" /></label><br />
+    </div>
+    <button (click)="onSave()">💾 שמירה</button>
+  </div>
