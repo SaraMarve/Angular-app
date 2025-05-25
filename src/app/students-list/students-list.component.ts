@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-export class Students {
-      public id?: number;
-      public firstName?: string;
-      public lastName?:  string;
-      public address?: string;
-      public phone? : string;
-      public active?: boolean;
-      public average?: number;
+interface Students {
+   id?: number;
+   firstName?: string;
+   lastName?:  string;
+   address?: string;
+   phone? : string;
+   active?: boolean;
+   average?: number;
   }
 @Component({
   selector: 'app-students-list',
@@ -45,5 +45,7 @@ export class StudentsListComponent {
     }
   ];
 
-
+  deleteStudent(id: number) {
+    this.students = this.students.filter(student => student.id !== id);
+  }
 }
