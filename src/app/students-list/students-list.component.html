@@ -1,0 +1,12 @@
+<h2>רשימת סטודנטים</h2>
+<ul>
+  <li *ngFor="let student of students">
+    <strong>{{ student.firstName }} {{ student.lastName }}</strong><br>
+    מזהה: {{ student.id }}<br>
+    כתובת: {{ student.address }}<br>
+    טלפון: {{ student.phone }}<br>
+    סטטוס: {{ student.active ? 'פעיל' : 'לא פעיל' }}<br>
+    ממוצע ציונים: {{ student.average }}<br>
+    <hr>
+  </li>
+</ul>
